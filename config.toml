@@ -1,0 +1,28 @@
+[faiss]
+add_timeout = 2                 # 添加向量后的后处理时间，单位秒
+remove_timeout = 4              # 删除向量后的后处理时间，单位秒
+sub_index_size = 2000           # 子向量库容量大小
+free_memory = 300               # gpu显存保留的大小，小于此值将不能再添加向量，单位MiB
+nlist = 128                     # index训练时聚簇的数量
+nprobe = 128                    # 搜索时进行搜索的默认聚簇数量
+dimension = 512                 # 向量维度
+
+[mysql]
+host = '127.0.0.1'
+port = 3307
+user = "root"
+password = "root"
+database = "vec"
+table_prefix = "vec_"     # 表名前缀
+
+[service]
+device = "gpu"                  # 使用设备 cpu or gpu
+gpu_device = "0, 1, 2, 3"       # 使用的gpu设备序号，若 device 为 cpu 此项无效
+default_db_names = ['pedestrians', 'control', 'login']          # 默认创建的人脸库
+default_max_size = [1000000, 10000, 10000]                          # 默认创建的人脸库对应的容量
+default_db_info = ['行人库', '布控库', '登录测试库']           # 默认创建的人脸库的对应说明
+default_is_multiple_gpus = [true, false, false]                     # 默认创建的人脸库是否使用多gpu
+
+[flask]
+host = "0.0.0.0"
+port = 17100

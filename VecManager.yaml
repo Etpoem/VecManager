@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment 
+metadata:
+  name: VecManager
+spec:
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        name: VecManager
+    spec:
+      containers:
+      - name: VecManager
+        image: face_backend_env:v4
+        command: ["python", "main.py"]
+        volumeMounts:
+        - mountPath: /app
+          name: data-volume
+        ports:
+          - containerPort: 17100
+            hostPort: 17100
+      volumes:
+      - name: data-volume
+        hostPath: 
+          path: /home/developer/VecManager
+          type: Directory
+      hostNetwork: true
